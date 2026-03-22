@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東京先進機構合同会社 | TOKYO ADVANCED INSTITUTE LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1130;
+    --navy-mid: #131d45;
+    --navy-light: #1c2a5e;
+    --gold: #c8a84b;
+    --gold-light: #e2c87a;
+    --gold-pale: #f5e9c4;
+    --white: #f9f7f2;
+    --gray: #b8bcc8;
+    --text: #2a2a3a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+  /* ===== HEADER / NAV ===== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(11, 17, 48, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 168, 75, 0.3);
+    transition: all 0.3s;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-circle {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .logo-circle svg {
+    width: 36px; height: 36px;
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+  }
+
+  .logo-text-wrap { display: flex; flex-direction: column; }
+
+  .logo-en {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    font-weight: 300;
+  }
+
+  .logo-jp {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: all 0.3s !important;
+  }
+  .nav-cta:hover {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+  }
+  .nav-cta::after { display: none !important; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(28, 42, 94, 0.8) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200, 168, 75, 0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.06) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Animated geometric rings */
+  .hero-rings {
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 700px; height: 700px;
+    pointer-events: none;
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(200,168,75,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotateRing linear infinite;
+  }
+
+  .ring:nth-child(1) { width: 300px; height: 300px; animation-duration: 20s; border-color: rgba(200,168,75,0.3); }
+  .ring:nth-child(2) { width: 450px; height: 450px; animation-duration: 30s; animation-direction: reverse; }
+  .ring:nth-child(3) { width: 600px; height: 600px; animation-duration: 40s; }
+
+  .ring::after {
+    content: '';
+    position: absolute;
+    top: -3px; left: 50%;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  @keyframes rotateRing {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    padding-top: 72px;
+  }
+
+  .hero-label {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-title span {
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  .hero-en {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(200,168,75,0.5);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-sub {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 36px;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200,168,75,0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 13px 36px;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTION BASE ===== */
+  section { padding: 100px 0; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title span { color: var(--gold); font-weight: 600; }
+
+  .gold-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* ===== ABOUT ===== */
+  .about { background: var(--white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: #555;
+    line-height: 2;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(11,17,48,0.08);
+    font-size: 0.85rem;
+  }
+
+  .info-label {
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  .info-value {
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ===== SERVICES ===== */
+  .services { background: var(--navy); }
+  .services .section-title { color: var(--white); }
+  .services .section-label { color: var(--gold-light); }
+
+  .services-intro {
+    color: var(--gray);
+    font-size: 0.88rem;
+    line-height: 1.9;
+    max-width: 600px;
+    margin-bottom: 4rem;
+    font-weight: 300;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(200,168,75,0.15);
+  }
+
+  .service-card {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.4s;
+  }
+
+  .service-card:hover { background: var(--navy-mid); }
+  .service-card:hover::before { width: 100%; }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: rgba(200,168,75,0.15);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.4s;
+  }
+
+  .service-card:hover .service-num { color: rgba(200,168,75,0.35); }
+
+  .service-icon {
+    width: 44px; height: 44px;
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.2rem;
+    transition: all 0.4s;
+  }
+
+  .service-card:hover .service-icon {
+    border-color: var(--gold);
+    background: rgba(200,168,75,0.1);
+  }
+
+  .service-icon svg {
+    width: 22px; height: 22px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .service-name {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+
+  .service-desc {
+    color: var(--gray);
+    font-size: 0.78rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ===== QUALIFICATIONS ===== */
+  .quals { background: #f4f1ea; }
+
+  .quals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .qual-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 18px 20px;
+    background: var(--white);
+    border-left: 3px solid var(--gold);
+    transition: all 0.3s;
+  }
+
+  .qual-item:hover {
+    transform: translateX(4px);
+    box-shadow: 4px 0 20px rgba(200,168,75,0.15);
+  }
+
+  .qual-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    margin-top: 7px;
+    flex-shrink: 0;
+  }
+
+  .qual-text {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .qual-auth {
+    font-size: 0.72rem;
+    color: #888;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ===== LICENSE BADGE ===== */
+  .license {
+    background: var(--navy);
+    padding: 60px 0;
+  }
+
+  .license-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .license-badge {
+    border: 1px solid rgba(200,168,75,0.5);
+    padding: 2.5rem 3rem;
+    position: relative;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .license-badge::before {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; right: -6px; bottom: -6px;
+    border: 1px solid rgba(200,168,75,0.2);
+    pointer-events: none;
+  }
+
+  .license-title {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .license-num {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--white);
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .license-sub {
+    color: var(--gray);
+    font-size: 0.78rem;
+    font-weight: 300;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact { background: var(--white); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 2rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .c-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,168,75,0.4);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .c-icon svg {
+    width: 16px; height: 16px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .c-text {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .c-text strong {
+    display: block;
+    color: var(--navy);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .contact-form-wrap {
+    background: var(--navy);
+    padding: 3rem;
+    position: relative;
+  }
+
+  .contact-form-wrap::after {
+    content: '';
+    position: absolute;
+    top: 10px; right: -10px; bottom: -10px; left: 10px;
+    border: 1px solid rgba(200,168,75,0.2);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .form-title {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold-light);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+    letter-spacing: 0.08em;
+  }
+
+  .form-group {
+    margin-bottom: 1.4rem;
+  }
+
+  .form-group label {
+    display: block;
+    color: var(--gray);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+    font-weight: 300;
+  }
+
+  .form-group label span {
+    color: #e07070;
+    margin-left: 4px;
+    font-size: 0.7rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(200,168,75,0.25);
+    color: var(--white);
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: all 0.3s;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(200,168,75,0.05);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.7;
+  }
+
+  .form-group select option { background: var(--navy-mid); color: var(--white); }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-family: 'Noto Sans JP', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(200,168,75,0.4);
+  }
+
+  .form-note {
+    color: rgba(200,200,200,0.4);
+    font-size: 0.72rem;
+    margin-top: 1rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  /* Success message */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .form-success .check-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .form-success .check-icon svg {
+    width: 28px; height: 28px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .form-success h4 {
+    font-family: 'Noto Serif JP', serif;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .form-success p {
+    color: var(--gray);
+    font-size: 0.85rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #06091e;
+    border-top: 1px solid rgba(200,168,75,0.2);
+    padding: 60px 0 30px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo-wrap { margin-bottom: 1.2rem; }
+
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(200,168,75,0.5);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-copy {
+    color: #444;
+    font-size: 0.75rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .footer-col h4 {
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .footer-links { list-style: none; }
+
+  .footer-links li { margin-bottom: 0.6rem; }
+
+  .footer-links a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 300;
+    transition: color 0.3s;
+    letter-spacing: 0.03em;
+  }
+
+  .footer-links a:hover { color: var(--gold-light); }
+
+  .footer-address {
+    color: #444;
+    font-size: 0.78rem;
+    line-height: 2;
+    font-weight: 300;
+  }
+
+  .footer-address strong {
+    display: block;
+    color: #666;
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-bottom p {
+    color: #333;
+    font-size: 0.72rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-since {
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(200,168,75,0.3);
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* ===== DIVIDER ===== */
+  .star-divider {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.5em;
+    opacity: 0.5;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    section { padding: 70px 0; }
+    .nav-links { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .quals-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-rings { display: none; }
+    .license-inner { flex-direction: column; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; }
+    .contact-form-wrap { padding: 2rem; }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+  .reveal-delay-6 { transition-delay: 0.6s; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <nav>
+    <a href="#" class="logo-wrap">
+      <div class="logo-circle">
+        <svg viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15"/>
+          <path d="M18 3 L18 33 M3 18 L33 18 M6.5 6.5 L29.5 29.5 M29.5 6.5 L6.5 29.5" stroke-width="1"/>
+          <circle cx="18" cy="18" r="6" fill="none" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="logo-text-wrap">
+        <span class="logo-en">TOKYO ADVANCED INSTITUTE LLC</span>
+        <span class="logo-jp">東京先進機構合同会社</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">会社情報</a></li>
+      <li><a href="#services">事業内容</a></li>
+      <li><a href="#qualifications">保有資格</a></li>
+      <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">★ SINCE JUNE 1, 2024 ★</p>
+    <h1 class="hero-title">
+      先進技術で、<span>未来を</span>設計する。
+    </h1>
+    <p class="hero-en">TOKYO ADVANCED INSTITUTE LLC</p>
+    <p class="hero-sub">
+      建築設計・先進技術統融合プランニングを核に、<br>
+      環境・エネルギー・空間の未来を切り拓く<br>
+      一級建築士事務所として、茨城・東京を拠点に活動しております。
+    </p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">事業内容を見る</a>
+      <a href="#contact" class="btn-outline">お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">ABOUT US</p>
+        <h2 class="section-title">東京先進機構<span>合同会社</span>について</h2>
+        <div class="gold-line"></div>
+        <p>
+          東京先進機構合同会社（TOKYO ADVANCED INSTITUTE LLC）は、
+          一級建築士事務所として茨城県知事登録を受けた設計事務所です。
+          建築の枠を超え、先進技術との融合プランニングを主軸に、
+          環境・エネルギー・空間の課題解決に取り組んでいます。
+        </p>
+        <p>
+          管理建築士・一級建築士の深い専門知識と豊富な保有資格を背景に、
+          住宅・店舗・企業向けの高付加価値なサービスを提供しております。
+          テラヘルツ波、ウルトラファインバブル、水浄化システムなど、
+          最先端技術の実装設計にも対応しております。
+        </p>
+        <p>
+          「設計」という行為を通じて、より豊かで持続可能な社会の実現に
+          貢献することを使命としています。
+        </p>
+      </div>
+      <div class="about-info reveal reveal-delay-2">
+        <div class="info-row">
+          <span class="info-label">商号</span>
+          <span class="info-value">東京先進機構合同会社<br><small style="color:#888; font-size:0.75rem;">TOKYO ADVANCED INSTITUTE LLC</small></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">代表者</span>
+          <span class="info-value">橋本 裕二</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">設立</span>
+          <span class="info-value">2024年5月15日<br><small style="color:#888; font-size:0.75rem;">創立 2024年6月1日</small></span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">本店</span>
+          <span class="info-value">〒301-0003<br>茨城県龍ヶ崎市平台 4-19-21</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">東京支店</span>
+          <span class="info-value">東京都調布市深大寺南町 3-11-4</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">事業者登録</span>
+          <span class="info-value">一級建築士事務所<br>茨城県知事登録 第A4216号</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">有効期限</span>
+          <span class="info-value">令和7年11月4日〜令和12年11月3日</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">TEL / FAX</span>
+          <span class="info-value">0297-66-3768</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">携帯</span>
+          <span class="info-value">080-4160-4165</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LICENSE ===== -->
+<div class="license">
+  <div class="license-inner">
+    <div class="license-badge reveal">
+      <div class="license-title">一級建築士事務所</div>
+      <div class="license-num">第 A 4216 号</div>
+      <div class="license-sub">茨城県知事登録</div>
+    </div>
+    <div style="flex:2; min-width:260px;" class="reveal reveal-delay-2">
+      <p class="section-label" style="color:var(--gold-light);">FIRST CLASS ARCHITECT OFFICE</p>
+      <h3 style="font-family:'Noto Serif JP',serif; color:var(--white); font-size:1.3rem; font-weight:300; margin-bottom:1rem; line-height:1.5;">
+        一級建築士事務所として、<br>確かな技術と信頼を。
+      </h3>
+      <p style="color:var(--gray); font-size:0.85rem; line-height:1.9; font-weight:300;">
+        建築物の設計・工事監理から先進技術の応用まで、
+        国家資格者が直接対応。高度な専門性と倫理に基づいた
+        プロフェッショナルサービスをご提供します。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="container">
+    <p class="section-label reveal">SERVICES</p>
+    <h2 class="section-title reveal reveal-delay-1">主要<span>事業内容</span></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <p class="services-intro reveal reveal-delay-3">
+      先進技術統融合プランニングを核に、建築設計・工事監理から
+      環境・エネルギー・浄化システムまで、幅広い技術領域に対応します。
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="service-name">建築物の設計及び工事監理</div>
+        <div class="service-desc">住宅・店舗・事務所など各種建築物の基本設計・実施設計、工事監理を一級建築士が担当します。</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l5 3"/></svg>
+        </div>
+        <div class="service-name">先進技術統融合プランニング</div>
+        <div class="service-desc">テラヘルツ波・ウルトラファインバブル装置など最先端技術の建築への統合設計・システム設計を行います。</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+        </div>
+        <div class="service-name">環境・エネルギー研究開発設計</div>
+        <div class="service-desc">消費エネルギー削減と発電効率化の技術開発・環境関連企業向け研究開発設計を行います。</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="service-name">水・空気・土壌浄化システム</div>
+        <div class="service-desc">雨水・地下水の飲料水製造、河川・湖沼・ダムの浄化、空気・土壌浄化システムの技術開発と設計。</div>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-num">05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="service-name">インテリアプランニング・コーディネート</div>
+        <div class="service-desc">空間の機能美を追求するインテリアプランニング設計とコーディネート業務を提供します。</div>
+      </div>
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-num">06</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <div class="service-name">インスペクション・空家付加価値設計</div>
+        <div class="service-desc">既存住宅状況調査（インスペクション）と空家の付加価値向上に向けた先進リノベーション設計。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUALIFICATIONS ===== -->
+<section class="quals" id="qualifications">
+  <div class="container">
+    <p class="section-label reveal">QUALIFICATIONS</p>
+    <h2 class="section-title reveal reveal-delay-1">保有<span>資格</span></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+
+    <div class="quals-grid">
+      <div class="qual-item reveal reveal-delay-1">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          管理建築士
+          <span class="qual-auth">国土交通大臣免許</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-2">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          一級建築士
+          <span class="qual-auth">国土交通大臣免許</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-1">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          一級施工管理技士
+          <span class="qual-auth">国土交通大臣認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-2">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          監理技術者資格者
+          <span class="qual-auth">国土交通大臣認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-1">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          特殊建物定期調査技術者
+          <span class="qual-auth">国土交通大臣認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-2">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          東京都防災ボランティア
+          <span class="qual-auth">東京都知事認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-1">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          ECO検定 環境社会検定技術者
+          <span class="qual-auth">東京商工会議所認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-2">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          インテリアコーディネーター
+          <span class="qual-auth">インテリア産業協会認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-1">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          インテリアプランナー
+          <span class="qual-auth">建築技術教育普及センター認定</span>
+        </div>
+      </div>
+      <div class="qual-item reveal reveal-delay-2">
+        <div class="qual-dot"></div>
+        <div class="qual-text">
+          インスペクション 既存住宅状況調査資格者
+          <span class="qual-auth">国土交通省告示</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="section-label reveal">CONTACT</p>
+    <h2 class="section-title reveal reveal-delay-1">お問い<span>合わせ</span></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+
+    <div class="contact-layout">
+      <div class="contact-info reveal reveal-delay-2">
+        <h3>お気軽にご相談ください</h3>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="c-text">
+              <strong>本店（茨城）</strong>
+              〒301-0003 茨城県龍ヶ崎市平台 4-19-21
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="c-text">
+              <strong>東京支店</strong>
+              東京都調布市深大寺南町 3-11-4
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.84a16 16 0 0 0 6.29 6.29l1.85-1.85a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="c-text">
+              <strong>TEL / FAX</strong>
+              0297-66-3768<br>
+              <small style="color:#888;">携帯：080-4160-4165</small>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="c-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="c-text">
+              <strong>E-MAIL</strong>
+              yuuji_hashimoto009_bluesky@outlook.jp<br>
+              yuuji_hashimoto009@icloud.com
+            </div>
+          </div>
+        </div>
+
+        <div style="padding: 1.5rem; background: #f8f5ee; border-left: 3px solid var(--gold);">
+          <p style="font-size:0.8rem; color:#666; line-height:1.8; font-weight:300;">
+            <strong style="color:var(--navy); font-size:0.75rem; letter-spacing:0.08em; display:block; margin-bottom:6px;">受付時間</strong>
+            平日 9:00〜18:00<br>
+            土日祝日・年末年始は翌営業日以降の対応となります。
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal reveal-delay-3">
+        <div class="form-title">お問い合わせフォーム</div>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>お名前<span>*</span></label>
+              <input type="text" placeholder="橋本 裕二" required>
+            </div>
+            <div class="form-group">
+              <label>会社名・組織名</label>
+              <input type="text" placeholder="〇〇株式会社">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>メールアドレス<span>*</span></label>
+              <input type="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>電話番号</label>
+              <input type="tel" placeholder="000-0000-0000">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>お問い合わせ種別<span>*</span></label>
+            <select required>
+              <option value="" disabled selected>選択してください</option>
+              <option>建築設計・工事監理のご依頼</option>
+              <option>インテリアプランニング・コーディネート</option>
+              <option>先進技術統融合プランニング</option>
+              <option>インスペクション（既存住宅状況調査）</option>
+              <option>環境・エネルギー技術開発</option>
+              <option>空家の活用・付加価値設計</option>
+              <option>その他のご相談</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>お問い合わせ内容<span>*</span></label>
+            <textarea placeholder="ご相談の内容をできるだけ詳しくお聞かせください。" required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">送　信　す　る</button>
+
+          <p class="form-note">
+            ご入力いただいた個人情報は、お問い合わせへの対応のみに使用し、<br>
+            第三者への提供は一切行いません。
+          </p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4>送信が完了しました</h4>
+          <p>
+            お問い合わせいただきありがとうございます。<br>
+            内容を確認の上、担当者より2〜3営業日以内にご連絡いたします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo-wrap" style="margin-bottom:1rem; display:inline-flex;">
+          <div class="logo-circle">
+            <svg viewBox="0 0 36 36" style="width:36px;height:36px;stroke:var(--gold);fill:none;stroke-width:1.5;">
+              <circle cx="18" cy="18" r="15"/>
+              <path d="M18 3 L18 33 M3 18 L33 18 M6.5 6.5 L29.5 29.5 M29.5 6.5 L6.5 29.5" stroke-width="1"/>
+              <circle cx="18" cy="18" r="6" fill="none" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="logo-text-wrap">
+            <span class="logo-en">TOKYO ADVANCED INSTITUTE LLC</span>
+            <span class="logo-jp">東京先進機構合同会社</span>
+          </div>
+        </a>
+        <p class="footer-tagline">★ FIRST CLASS ARCHITECT OFFICE ★</p>
+        <p class="footer-copy">
+          一級建築士事務所 茨城県知事登録<br>
+          第A4216号
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#about">会社情報</a></li>
+          <li><a href="#services">事業内容</a></li>
+          <li><a href="#qualifications">保有資格</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-address">
+          <strong>本店（茨城）</strong>
+          〒301-0003<br>
+          茨城県龍ヶ崎市平台 4-19-21
+        </div>
+        <div class="footer-address" style="margin-top:1rem;">
+          <strong>東京支店</strong>
+          東京都調布市深大寺南町 3-11-4
+        </div>
+        <div class="footer-address" style="margin-top:1rem;">
+          <strong>TEL / FAX</strong>
+          0297-66-3768
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2024 東京先進機構合同会社 All Rights Reserved.</p>
+      <span class="footer-since">★ SINCE JUNE 1, 2024 ★</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+
+  // Header scroll style
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if (window.scrollY > 80) {
+      header.style.background = 'rgba(11,17,48,0.98)';
+    } else {
+      header.style.background = 'rgba(11,17,48,0.95)';
+    }
+  });
+</script>
+</body>
+</html>
